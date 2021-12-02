@@ -87,17 +87,17 @@ void loop() {
    double volts = (peakToPeak * 5.0) / 1024;  // convert to volts
   
   // Displays the distance on the Serial Monitor
-  Serial.print("Distance: ");
+  //Serial.print("Distance: ");
   Serial.print(distance);
-  Serial.println(" cm");
+  //Serial.println(" cm");
 
-  Serial.print("Volume: ");
-  Serial.println(volts);
+  //Serial.print("Volume: ");
+  Serial.print("#" + String(volts));
 
   double seconds = (float)(time - prevTime) / 1000.0;
-  String secondsString = String(seconds) + " seconds.";
+  String secondsString = String(seconds);// + " seconds.";
 
-  Serial.print("Time Since Button Press: ");
-  Serial.println(secondsString);
-  Serial.println("");
+  //Serial.print("Time Since Button Press: ");
+  Serial.println("#" + String(seconds));
+  //Serial.println("");
 }
