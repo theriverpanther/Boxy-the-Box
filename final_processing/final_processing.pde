@@ -10,9 +10,16 @@ int distanceVal = 0;
 float volumeVal = 0;
 int buttonTimeVal = 0;
 int time = 0;
+int timeSinceMovement = 0;
+int timeTalking = 0;
 SoundFile laughTrack;
 SoundFile shutdown;
 SoundFile death;
+
+SoundFile[] buttonSounds;
+SoundFile[] micSounds;
+SoundFile[] movementSounds;
+
 SoundFile currSound;
 
 void setup(){
@@ -27,6 +34,24 @@ void setup(){
   laughTrack = new SoundFile(this, "sitcom-laughing-1.mp3");
   shutdown = new SoundFile(this, "windows_xp_shutdown.mp3");
   death = new SoundFile(this, "roblox-death-sound_1.mp3");
+  
+  buttonSounds = new SoundFile[]{
+    new SoundFile(this,"Sounds/make-turn-quicker.mp3"),
+    new SoundFile(this,"Sounds/ouch.mp3"),
+    new SoundFile(this,"Sounds/pushing-buttons.mp3")
+  };
+  micSounds = new SoundFile[]{
+    new SoundFile(this,"Sounds/cut-the-chit-chat.mp3"),
+    new SoundFile(this,"Sounds/boring.mp3"),
+    new SoundFile(this,"Sounds/shut-up.mp3")
+  };
+  movementSounds = new SoundFile[]{
+    //new SoundFile(this,"Sounds/now-you-move.mp3"),
+    new SoundFile(this,"Sounds/play-faster.mp3"),
+    new SoundFile(this,"Sounds/sit-there.mp3"),
+    new SoundFile(this,"Sounds/dont-have-all-day.mp3")
+  };
+  
   currSound = laughTrack;
 }
 void draw(){
@@ -35,24 +60,40 @@ void draw(){
       soundCooldown -= millis() - time;
     }
     
+    int rand = (int)(Math.random() * 3);
     //Button pressed
     if(buttonTimeVal == 0 && time > 2000) {
-      currSound = death;
+      currSound = buttonSounds[rand];
       currSound.play();
       soundCooldown = 500;
+      timeSinceMovement = 0;
+      timeTalking = 0;
     }
+    
     //Loud volume
-    else if(volumeVal > 200) {
-      currSound = laughTrack;
-      currSound.play();
-      soundCooldown = 2000;
+    if(volumeVal > 130) {
+      timeTalking += millis() - time;
     }
     //Distance far
-    else if(distanceVal > 10 && distanceVal < 100) {
-      currSound = shutdown;
+    if(distanceVal > 10) {
+      timeSinceMovement += millis() - time;
+    }
+    
+    if(timeSinceMovement > 30000) {
+      currSound = movementSounds[rand];
       currSound.play();
       soundCooldown = 2000;
+      timeSinceMovement = 0;
+      timeTalking = 0;
     }
+    else if(timeTalking > 7500) {
+      currSound = micSounds[rand];
+      currSound.play();
+      soundCooldown = 2000;
+      timeSinceMovement = 0;
+      timeTalking = 0;
+    }
+    
   }
   
   time = millis();
