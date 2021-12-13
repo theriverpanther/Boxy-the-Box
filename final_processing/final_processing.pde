@@ -4,7 +4,7 @@ import processing.serial.*;
 SoundFile sound;
 Serial arduinoPort;
 
-final int portIndex = 1;
+final int portIndex = 0;
 int soundCooldown = 0;
 int distanceVal = 0;
 float volumeVal = 0;
