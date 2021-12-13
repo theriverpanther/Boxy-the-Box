@@ -1,15 +1,3 @@
-/*
-Button
-Carlos Castellanos | 2014 | ccastellanos.com
-Press and release to turn an LED on, then press and release again to turn off
-Note: this example works best with a momentary pushbutton or similarly biased switch
-Schematic, see:
-https://github.com/carloscastellanos/teaching/blob/master/Arduino/Basics/Digital/Button_schem.png
-Suggestions:
-- Can you make the LED go off after a certain amount of time has passed? Hint: while
-  using 'delay' will work, you can also look into the 'millis' function...
-- add an additional led and/or button na d increase the complexity of behaviors  
-*/
 // constants won't change. They're used here to set pin numbers (faster/saves memory):
 const int buttonPin = 8;      // pins for button and LED
 const int trigPin = 9;

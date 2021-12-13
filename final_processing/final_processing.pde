@@ -106,10 +106,6 @@ void serialEvent(Serial port) {
       distanceVal = /*FormatReading*/int(reading.split("#")[0]);
       volumeVal = FormatReadingFloat(reading.split("#")[1]);
       buttonTimeVal = /*FormatReading*/int(reading.split("#")[2]);
-      
-      //println(distanceVal);// = /*FormatReading*/int(reading.split("#")[0]);
-      //println(volumeVal);// = FormatReading(reading.split("#")[1]);
-      //println(buttonTimeVal);// = /*FormatReading*/int(reading.split("#")[2]);
     }
 }
 
@@ -121,7 +117,6 @@ int FormatReading(String reading) {
   reading = trim(reading);
   // convert to an int and map to the screen height:
   int val = int(reading);
-  //println(sensorReading);
   val = int(map(val, 0, 5, 0, 1023));
   return val;
 }
@@ -133,7 +128,6 @@ float FormatReadingFloat(String reading) {
   reading = trim(reading);
   // convert to an int and map to the screen height:
   float val = float(reading);
-  //println(sensorReading);
   val = map(val, 0, 5, 0, 1023);
   return val;
 }
