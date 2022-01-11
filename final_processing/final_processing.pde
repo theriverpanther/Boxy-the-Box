@@ -38,18 +38,22 @@ void setup(){
   buttonSounds = new SoundFile[]{
     new SoundFile(this,"Sounds/make-turn-quicker.mp3"),
     new SoundFile(this,"Sounds/ouch.mp3"),
-    new SoundFile(this,"Sounds/pushing-buttons.mp3")
+    new SoundFile(this,"Sounds/pushing-buttons.mp3"),
+    new SoundFile(this,"Sounds/navy-seals.mp3"),
+    new SoundFile(this,"Sounds/bitch.mp3")
   };
   micSounds = new SoundFile[]{
     new SoundFile(this,"Sounds/cut-the-chit-chat.mp3"),
     new SoundFile(this,"Sounds/boring.mp3"),
-    new SoundFile(this,"Sounds/shut-up.mp3")
+    new SoundFile(this,"Sounds/shut-up.mp3"),
+    new SoundFile(this,"Sounds/what-talk.mp3")
   };
   movementSounds = new SoundFile[]{
     //new SoundFile(this,"Sounds/now-you-move.mp3"),
     new SoundFile(this,"Sounds/play-faster.mp3"),
     new SoundFile(this,"Sounds/sit-there.mp3"),
-    new SoundFile(this,"Sounds/dont-have-all-day.mp3")
+    new SoundFile(this,"Sounds/dont-have-all-day.mp3"),
+    new SoundFile(this,"Sounds/geneva.mp3"),
   };
   
   currSound = laughTrack;
@@ -60,9 +64,10 @@ void draw(){
       soundCooldown -= millis() - time;
     }
     
-    int rand = (int)(Math.random() * 3);
+   
     //Button pressed
     if(buttonTimeVal == 0 && time > 2000) {
+      int rand = (int)(Math.random() * buttonSounds.length);
       currSound = buttonSounds[rand];
       currSound.play();
       soundCooldown = 500;
@@ -79,7 +84,8 @@ void draw(){
       timeSinceMovement += millis() - time;
     }
     
-    if(timeSinceMovement > 30000) {
+    if(timeSinceMovement > 15000) {
+       int rand = (int)(Math.random() * movementSounds.length);
       currSound = movementSounds[rand];
       currSound.play();
       soundCooldown = 2000;
@@ -87,6 +93,7 @@ void draw(){
       timeTalking = 0;
     }
     else if(timeTalking > 7500) {
+       int rand = (int)(Math.random() * micSounds.length);
       currSound = micSounds[rand];
       currSound.play();
       soundCooldown = 2000;
